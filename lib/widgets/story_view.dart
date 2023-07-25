@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
@@ -114,6 +113,7 @@ class StoryItem {
     bool shown = false,
     Map<String, dynamic>? requestHeaders,
     Duration? duration,
+    Widget? storyHeader,
   }) {
     return StoryItem(
       Container(
@@ -121,6 +121,10 @@ class StoryItem {
         color: Colors.black,
         child: Stack(
           children: <Widget>[
+            if (storyHeader != null)
+              SafeArea(
+                child: storyHeader,
+              ),
             StoryImage.url(
               url,
               controller: controller,
@@ -827,11 +831,11 @@ class StoryProgressIndicator extends StatelessWidget {
         this.indicatorHeight,
       ),
       foregroundPainter: IndicatorOval(
-        this.indicatorForegroundColor?? Colors.white.withOpacity(0.8),
+        this.indicatorForegroundColor ?? Colors.white.withOpacity(0.8),
         this.value,
       ),
       painter: IndicatorOval(
-        this.indicatorColor?? Colors.white.withOpacity(0.4),
+        this.indicatorColor ?? Colors.white.withOpacity(0.4),
         1.0,
       ),
     );
