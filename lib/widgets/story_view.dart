@@ -121,16 +121,16 @@ class StoryItem {
         color: Colors.black,
         child: Stack(
           children: <Widget>[
-            if (storyHeader != null)
-              SafeArea(
-                child: storyHeader,
-              ),
             StoryImage.url(
               url,
               controller: controller,
               fit: imageFit,
               requestHeaders: requestHeaders,
             ),
+            if (storyHeader != null)
+              SafeArea(
+                child: storyHeader,
+              ),
             SafeArea(
               child: Align(
                 alignment: Alignment.bottomCenter,
