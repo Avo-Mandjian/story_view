@@ -127,10 +127,6 @@ class StoryItem {
               fit: imageFit,
               requestHeaders: requestHeaders,
             ),
-            if (storyHeader != null)
-              SafeArea(
-                child: storyHeader,
-              ),
             SafeArea(
               child: Align(
                 alignment: Alignment.bottomCenter,
@@ -156,7 +152,8 @@ class StoryItem {
                       : SizedBox(),
                 ),
               ),
-            )
+            ),
+            if (storyHeader != null) storyHeader,
           ],
         ),
       ),
@@ -660,8 +657,9 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
             ),
           ),
           Align(
-              alignment: Alignment.centerRight,
-              heightFactor: 1,
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: MediaQuery.sizeOf(context).height * 0.78,
               child: GestureDetector(
                 onTapDown: (details) {
                   widget.controller.pause();
@@ -695,8 +693,6 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
                         }
 
                         verticalDragInfo!.update(details.primaryDelta!);
-
-                        // TODO: provide callback interface for animation purposes
                       },
                 onVerticalDragEnd: widget.onVerticalSwipeComplete == null
                     ? null
@@ -711,11 +707,13 @@ class StoryViewState extends State<StoryView> with TickerProviderStateMixin {
 
                         verticalDragInfo = null;
                       },
-              )),
+              ),
+            ),
+          ),
           Align(
-            alignment: Alignment.centerLeft,
-            heightFactor: 1,
-            child: SizedBox(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+                height: MediaQuery.sizeOf(context).height * 0.78,
                 child: GestureDetector(onTap: () {
                   widget.controller.previous();
                 }),
